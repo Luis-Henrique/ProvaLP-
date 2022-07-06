@@ -38,7 +38,7 @@ class StudentRepository
         using var connection = new SqliteConnection(_databaseConfig.ConnectionString);
         connection.Open();
 
-        connection.Execute("UPDATE Student SET former = @Former Where resgistration = @Registration", new { Registration = registration, @Former = true });
+        connection.Execute("UPDATE Student SET former = true Where registration = @Registration", new { Registration = registration });
     }
 
     public List<Student> GetAll()
@@ -56,7 +56,7 @@ class StudentRepository
         using var connection = new SqliteConnection(_databaseConfig.ConnectionString);
         connection.Open();
 
-        var students = connection.Query<Student>("SELECT * FROM Student WHERE formed = true").ToList();
+        var students = connection.Query<Student>("SELECT * FROM Student WHERE former = true").ToList();
 
         return students;
     }

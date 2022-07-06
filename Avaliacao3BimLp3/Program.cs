@@ -90,6 +90,23 @@ if(modelName == "Student")
         } 
     }
 
+    if(modelAction == "ListByCity")
+    {
+        string city = args[2];
+
+        if(studentRepository.GetAllStudentByCity(city).Any())
+        {
+            Console.WriteLine("Student List");
+            foreach (var student in studentRepository.GetAllStudentByCity(city))
+            {
+                Console.WriteLine($"{student.Registration}, {student.Name}, {student.City}, {student.Former}");
+            } 
+        }else
+        {
+            Console.WriteLine("Nenhum estudante cadastrado");
+        } 
+    }
+
     if(modelAction == "ListByCities")
     {
 	    String[] cities = new String[args.GetLength(1)-3];
